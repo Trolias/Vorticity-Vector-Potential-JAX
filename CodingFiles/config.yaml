@@ -1,0 +1,17 @@
+Grid:
+  Nx: 5
+  Ny: 5
+  Nz: 5
+
+Geometry:
+  L: 1.0
+  H: 1.0
+  D: 1.0
+
+Poisson:
+  Iterations: 1000
+  tol: 1e-6
+
+conv_tol: 1e-06
+Uwall: 1.0
+Re: 10

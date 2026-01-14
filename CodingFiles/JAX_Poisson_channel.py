@@ -5,7 +5,7 @@ from jax import lax
 from JAX_Utils_3D import CornersBC
 from functools import partial
 from jax import config
-config.update("jax_enable_x64", True) # Enable 64-bit precision for better accuracy in simulations
+config.update("jax_enable_x64", True) 
 
 
 def apply_potential_BCs_channel(u_new, dx, dy, dz, volumetric_flux, H, field_name):
@@ -14,7 +14,7 @@ def apply_potential_BCs_channel(u_new, dx, dy, dz, volumetric_flux, H, field_nam
     Y = jnp.linspace(0.0, H, Ny)
     Y_profile = (volumetric_flux * Y[1:-1]).reshape(-1, 1)
     value = volumetric_flux * Y[-1]
-    face_shape = u_new[-1, 1:-1, 1:-1].shape  # e.g., (Ny-2, Nz-2)
+    face_shape = u_new[-1, 1:-1, 1:-1].shape  
 
     if field_name == "psi_x":
         # Dirichlet BCs for psi_x: Setting the field to zero on specific walls.
@@ -110,7 +110,6 @@ def apply_potential_BCs_channel_2ndOrder(u_new, dx, dy, dz, volumetric_flux, H, 
 
 
 # POISSON STEP
-@partial(jit, static_argnames=('field_name'))
 def poisson_step(u, b, volumetric_flux, H, dx, dy, dz, field_name):
     """
     Performs one iteration of the Jacobi solver for the Poisson equation
@@ -123,8 +122,7 @@ def poisson_step(u, b, volumetric_flux, H, dx, dy, dz, field_name):
         dy (float): Grid spacing in the y-direction.
         dz (float): Grid spacing in the z-direction.
         field_name (str): Identifier for applying specific boundary conditions
-                          ("psi_x", "psi_y", "psi_z"). This should be a static argument
-                          to the `Poisson` function for efficient JAX compilation.
+                          ("psi_x", "psi_y", "psi_z"). 
 
     Returns:
         jnp.ndarray: The updated 3D solution field after one iteration and BCs.
@@ -149,7 +147,6 @@ def poisson_step(u, b, volumetric_flux, H, dx, dy, dz, field_name):
     return u_new
 
 
-@partial(jit, static_argnames=('field_name', 'max_iterations', 'tol'))
 def Poisson_solver(u_init, dx, dy, dz, b, volumetric_flux, H, max_iterations, tol=None, field_name=None):
     """
     Solves the 3D Poisson equation iteratively using the Jacobi method with JAX.
@@ -167,8 +164,7 @@ def Poisson_solver(u_init, dx, dy, dz, b, volumetric_flux, H, max_iterations, to
                                will run for `max_iterations` regardless of convergence.
         field_name (str, optional): A string identifying the type of field
                                     ("psi_x", "psi_y", "psi_z") to apply
-                                    the correct boundary conditions. This must be
-                                    a **static argument** for JAX compilation.
+                                    the correct boundary conditions.
 
     Returns:
         jnp.ndarray: The final 3D solution field after convergence or reaching
@@ -196,3 +192,4 @@ def Poisson_solver(u_init, dx, dy, dz, b, volumetric_flux, H, max_iterations, to
     final_u, final_k, final_diff = lax.while_loop(cond_fn, body_fn, state)
 
     return final_u, final_k, final_diff 
+

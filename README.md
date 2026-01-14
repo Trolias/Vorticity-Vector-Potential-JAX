@@ -14,4 +14,4 @@ Supported geometries: 3D lid-driven cavity and square duct flow
 
 ## Mathematical Formulation
 Solve the Vorticity Transport Equation in the non-conservative form:
-$    \frac{ \partial\vec{\omega}}{\partial t} + (\vec{\omega} \cdot \nabla)\vec{u} = \frac{1}{Re} \nabla^2\vec{\omega} + (\vec{u} \cdot \nabla)\vec{\omega} $
+$\frac{ \partial\vec{\omega}}{\partial t} + (\vec{\omega} \cdot \nabla)\vec{u} = \frac{1}{Re} \nabla^2\vec{\omega} + (\vec{u} \cdot \nabla)\vec{\omega}$

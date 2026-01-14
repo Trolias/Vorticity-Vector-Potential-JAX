@@ -21,3 +21,17 @@ This requires first solving the Poisson equation for the vector potential:
 $\nabla^2\vec{\psi} = - \vec{\omega}$
 
 and after that computing and updating the vorticity by solving the VTE.
+
+## Discretization:
+
+Time derivative: 1st-order Euler scheme
+Spatial derivatives: 2nd-order central differences
+Grid: Uniform collocated mesh
+
+Installation
+Requirements
+
+Python 3.8+
+JAX with GPU support
+NumPy
+Matplotlib (for visualization)

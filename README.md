@@ -34,4 +34,4 @@ Requirements
 Python 3.8+
 JAX with GPU support
 NumPy
-Matplotlib (for visualization)
+Results are extracted in Tecplot format

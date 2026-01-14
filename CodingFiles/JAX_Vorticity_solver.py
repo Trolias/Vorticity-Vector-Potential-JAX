@@ -7,11 +7,10 @@ from JAX_Utils_3D import*
 from functools import partial
 from JAX_BCs_cavity import*
 from jax import config
-config.update("jax_enable_x64", True) # Enable 64-bit precision for better accuracy in simulations
+config.update("jax_enable_x64", True)
 
 
 
-@jit
 def calc_velocities(psi_x, psi_y, psi_z, dx, dy, dz):
 
     u = Grad_y(psi_z, dy) - Grad_z(psi_y, dz)
@@ -19,7 +18,6 @@ def calc_velocities(psi_x, psi_y, psi_z, dx, dy, dz):
     w = Grad_x(psi_y, dx) - Grad_y(psi_x, dy)
     return u, v, w
 
-@jit 
 def calc_vorticity(u,v,w,dx,dy,dz):
 
     omega_x = Grad_y(w,dy) - Grad_z(v,dz)
@@ -29,7 +27,6 @@ def calc_vorticity(u,v,w,dx,dy,dz):
     return omega_x, omega_y, omega_z 
 
 
-@partial(jit, static_argnames=('Poisson_iterations', 'Poisson_tol', 'Uwall', 'Re', 'nu', 'dx', 'dy', 'dz', 'dt'))
 def vorticity_step(psi_x, psi_y, psi_z,
                    omega_x, omega_y, omega_z,
                    u, v, w, # u, v, w are current velocities, used for transport terms
@@ -137,7 +134,8 @@ def vorticity_step(psi_x, psi_y, psi_z,
     # Return all updated fields for the next iteration of the main loop
     return psi_new_x, psi_new_y, psi_new_z, omega_new_x, omega_new_y, omega_new_z, u_new, v_new, w_new
 
-@partial(jit, static_argnames=('conv_tol', 'Poisson_iterations', 'Poisson_tol', 'dx', 'dy', 'dz', 'dt', 'Uwall', 'Re', 'nu'))
+# Use @jit flag here to speed up the execution of the code
+@jit
 def main_vorticity_loop(psi_init_x, psi_init_y, psi_init_z,
                         omega_init_x, omega_init_y, omega_init_z,
                         u_init, v_init, w_init, # Initial velocities as part of state
@@ -254,4 +252,5 @@ def main_vorticity_loop(psi_init_x, psi_init_y, psi_init_z,
            omega_final_x, omega_final_y, omega_final_z, \
            u_final, v_final, w_final, \
            steps, final_error
+
 #

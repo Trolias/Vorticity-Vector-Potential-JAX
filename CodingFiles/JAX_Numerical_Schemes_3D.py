@@ -9,7 +9,6 @@ config.update("jax_enable_x64", True) # Enable 64-bit precision for better accur
     Grad_{x,y,z) refers to the corresponding differentiating variable
     Adv_{x,y,z} refers to direction first-order upwind scheme describing the convective term in NS equations
 """
-@jit 
 def curl (field_x, field_y, field_z, dx,dy,dz):
 
     u_x = Grad_y(field_z,dy) - Grad_z(field_y,dz)
@@ -18,44 +17,37 @@ def curl (field_x, field_y, field_z, dx,dy,dz):
 
     return u_x, u_y, u_z
 
-@jit
 def Grad_x(u, dx):
     out = jnp.zeros_like(u)
     interior = (u[1:-1, 2:,1:-1] - u[1:-1, :-2,1:-1]) / (2.0 * dx)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Grad_y(u, dy):
     out = jnp.zeros_like(u)
     interior = (u[2:, 1:-1,1:-1] - u[:-2, 1:-1,1:-1]) / (2.0 * dy)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Grad_z(u, dz):
     out = jnp.zeros_like(u)
     interior = (u[1:-1, 1:-1,2:] - u[1:-1, 1:-1,:-2]) / (2.0 * dz)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Laplacian_x(u, dx):
     out = jnp.zeros_like(u)
     interior = (u[1:-1, 2:,1:-1] - 2.0 * u[1:-1, 1:-1,1:-1] + u[1:-1, :-2,1:-1]) / (dx * dx)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Laplacian_y(u, dy):
     out = jnp.zeros_like(u)
     interior = (u[2:, 1:-1,1:-1] - 2.0 * u[1:-1, 1:-1,1:-1] + u[:-2, 1:-1,1:-1]) / (dy * dy)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Laplacian_z(u, dz):
     out = jnp.zeros_like(u)
     interior = (u[1:-1, 1:-1,2:] - 2.0 * u[1:-1, 1:-1,1:-1] + u[1:-1, 1:-1,:-2]) / (dz * dz)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
 
-@jit
 def Adv_x(velocity_adv_field, phi_field, dx):
 
     out = jnp.zeros_like(phi_field)
@@ -77,7 +69,6 @@ def Adv_x(velocity_adv_field, phi_field, dx):
 
     return out.at[interior_slice].set(advection_term)
 
-@jit
 def Adv_y(velocity_adv_field, phi_field, dy):
 
     out = jnp.zeros_like(phi_field)
@@ -99,7 +90,6 @@ def Adv_y(velocity_adv_field, phi_field, dy):
 
     return out.at[interior_slice].set(advection_term)
 
-@jit
 def Adv_z(velocity_adv_field, phi_field, dz):
 
     out = jnp.zeros_like(phi_field)
@@ -127,31 +117,26 @@ def Backward_1st_x(u, dx):
     interior = (u[1:-1, 1:-1,1:-1] - u[1:-1, :-2,1:-1]) / (dx)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Backward_1st_y(u, dy):
     out = jnp.zeros_like(u)
     interior = (u[1:-1, 1:-1,1:-1] - u[:-2, 1:-1,1:-1]) / (dy)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Backward_1st_z(u, dz):
     out = jnp.zeros_like(u)
     interior = (u[1:-1, 1:-1,1:-1] - u[1:-1, 1:-1,:-2]) / (dz)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Forward_1st_x(u, dx):
     out = jnp.zeros_like(u)
     interior = (u[1:-1, 2:,1:-1] - u[1:-1, 1:-1,1:-1]) / (dx)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Forward_1st_y(u, dy):
     out = jnp.zeros_like(u)
     interior = (u[2:, 1:-1,1:-1] - u[1:-1, 1:-1,1:-1]) / (dy)
     return out.at[1:-1,1:-1,1:-1].set(interior)
 
-@jit
 def Forward_1st_z(u, dz):
     out = jnp.zeros_like(u)
     interior = (u[1:-1, 1:-1,2:] - u[1:-1, 1:-1,1:-1]) / (dz)
@@ -187,7 +172,6 @@ def rhs_omega(omega_x, omega_y, omega_z, u, v, w, dx, dy, dz, Re):
     return rhs_x, rhs_y, rhs_z
 
 
-@jit 
 def RK4(omega_x, omega_y, omega_z, u, v, w, dx, dy, dz, dt, Re):
 
     k1 = rhs_omega(omega_x, omega_y, omega_z, u, v, w, dx, dy, dz, Re)
@@ -220,7 +204,6 @@ def RK4(omega_x, omega_y, omega_z, u, v, w, dx, dy, dz, dt, Re):
 
 """
 
-@jit
 def int_grad_x(f, dx):
     df = jnp.zeros_like(f)
 
@@ -229,7 +212,7 @@ def int_grad_x(f, dx):
     df = df.at[1:-1, -2, 1:-1].set((f[1:-1, -2, 1:-1] - f[1:-1, -3, 1:-1]) / dx)
 
     return df[1:-1,1:-1,1:-1]
-@jit
+    
 def int_grad_y(f, dy):
     df = jnp.zeros_like(f)
     df = df.at[2:-2, 1:-1, 1:-1].set((f[3:-1, 1:-1, 1:-1] - f[1:-3, 1:-1, 1:-1]) / (2.0 * dy))
@@ -237,7 +220,6 @@ def int_grad_y(f, dy):
     df = df.at[-2, 1:-1, 1:-1].set((f[-2, 1:-1, 1:-1] - f[-3, 1:-1, 1:-1]) / dy)
     return df[1:-1,1:-1,1:-1]
 
-@jit
 def int_grad_z(f, dz):
     df = jnp.zeros_like(f)
     df = df.at[1:-1, 1:-1, 2:-2].set((f[1:-1, 1:-1, 3:-1] - f[1:-1, 1:-1, 1:-3]) / (2.0 * dz))
@@ -246,8 +228,6 @@ def int_grad_z(f, dz):
     return df[1:-1,1:-1,1:-1]
 
 
-
-@jit
 def NonLinearConvectivePotentialBasedTerms(psi_new_x,psi_new_y,psi_new_z,dx,dy,dz):
     viscous_term_x = jnp.zeros_like(psi_new_x)
     viscous_term_y = jnp.zeros_like(psi_new_y)
@@ -374,5 +354,6 @@ def NonLinearConvectivePotentialBasedTerms(psi_new_x,psi_new_y,psi_new_z,dx,dy,d
 
     return NonLinear_Conv_x, NonLinear_Conv_y, NonLinear_Conv_z
             
+
 
     

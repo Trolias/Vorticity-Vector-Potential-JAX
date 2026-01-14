@@ -1,3 +1,14 @@
-# Vorticity-Vector-Potential-JAX
+#Vorticity-Vector-Potential-JAX
+A GPU-accelerated Navier-Stokes solver for 3D incompressible flows using the vorticity-vector potential formulation, implemented in JAX.
+##Overview
+This solver implements the vorticity-vector potential (ψ-ω) formulation for incompressible flows, eliminating the pressure term and satisfying the divergence-free condition automatically. The code is optimized for GPU execution using JAX's JIT compilation and automatic differentiation capabilities.
+Key Features:
 
-Navier-Stokes solver for 3D incompressible flows with the vorticity-vector potential formulation. For the discretization finnite differences have been used with 1st-oder Euler for the time derivative and 2nd-order Central Differences for spatial derivatives. The code uses a uniform collocated grid and is designed to run for the geometries of 3D lid driven cavity and duct geometry utilizing GPU capabilities.
+##Vorticity-vector potential formulation for 3D incompressible Navier-Stokes equations
+GPU-accelerated computations with JAX
+JIT compilation for optimized performance
+Finite difference discretization (2nd-order spatial, 1st-order temporal)
+Uniform collocated grid structure
+Supported geometries: 3D lid-driven cavity and square duct flow
+
+##Mathematical Formulation

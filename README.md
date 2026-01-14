@@ -14,7 +14,6 @@ the velocity field.
 
 The code leverages **JAX** for:
 - Just-In-Time (JIT) compilation
-- Automatic vectorization
 - GPU acceleration
 
 ---

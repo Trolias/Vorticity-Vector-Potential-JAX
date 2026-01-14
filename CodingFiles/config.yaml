@@ -1,7 +1,7 @@
 Grid:
-  Nx: 5
-  Ny: 5
-  Nz: 5
+  Nx: 128
+  Ny: 128
+  Nz: 128
 
 Geometry:
   L: 1.0
@@ -14,4 +14,5 @@ Poisson:
 
 conv_tol: 1e-06
 Uwall: 1.0
-Re: 10
+Re: 1900
+

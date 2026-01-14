@@ -4,7 +4,6 @@ from functools import partial
 from JAX_Utils_3D import CornersBC
 
 
-@partial(jit, static_argnames=('field_name',))
 def apply_velocity_BCs_channel(vel, Uinlet, field_name):
     """Applies velocity boundary conditions to a field based on its component name.
 
@@ -12,7 +11,6 @@ def apply_velocity_BCs_channel(vel, Uinlet, field_name):
         vel (jnp.ndarray): The velocity component field (u, v, or w).
         Uwall (float): The velocity of the moving wall.
         field_name (str): The name of the velocity component ("u", "v", or "w").
-                          This is a static argument for JAX compilation.
 
     Returns:
         jnp.ndarray: The velocity field with applied boundary conditions.
@@ -42,9 +40,8 @@ def apply_velocity_BCs_channel(vel, Uinlet, field_name):
         vel = vel.at[1:-1, 1:-1, 0].set(0.0)
         vel = vel.at[1:-1, 1:-1, -1].set(0.0)
 
-    vel = CornersBC(vel) # Apply corner BCs (assumed JAX-compatible)
+    vel = CornersBC(vel) # Apply corner BCs 
 
-@partial(jit, static_argnames=('field_name',))
 def apply_vorticity_bcs_channel(omega, u, v, w, dx, dy, dz, Uinlet, field_name):
     """Applies vorticity boundary conditions based on the field component and velocities.
 
@@ -54,7 +51,6 @@ def apply_vorticity_bcs_channel(omega, u, v, w, dx, dy, dz, Uinlet, field_name):
         dx, dy, dz (float): Grid spacings.
         Uwall (float): The velocity of the moving wall (used for omega_z top wall).
         field_name (str): The name of the vorticity component ("omega_new_x", etc.).
-                          This is a static argument for JAX compilation.
 
     Returns:
         jnp.ndarray: The vorticity field with applied boundary conditions.
@@ -95,7 +91,6 @@ def apply_vorticity_bcs_channel(omega, u, v, w, dx, dy, dz, Uinlet, field_name):
     return omega
 
 
-@partial(jit, static_argnames=('field_name',))
 def apply_vorticity_bcs_channel_2ndOrder(omega, u, v, w, dx, dy, dz, Uinlet, field_name):
     """Applies vorticity boundary conditions based on the field component and velocities.
 
@@ -105,7 +100,6 @@ def apply_vorticity_bcs_channel_2ndOrder(omega, u, v, w, dx, dy, dz, Uinlet, fie
         dx, dy, dz (float): Grid spacings.
         Uwall (float): The velocity of the moving wall (used for omega_z top wall).
         field_name (str): The name of the vorticity component ("omega_new_x", etc.).
-                          This is a static argument for JAX compilation.
 
     Returns:
         jnp.ndarray: The vorticity field with applied boundary conditions.
@@ -143,4 +137,5 @@ def apply_vorticity_bcs_channel_2ndOrder(omega, u, v, w, dx, dy, dz, Uinlet, fie
 
 
     omega = CornersBC(omega) # Apply corner BCs 
+
     return omega

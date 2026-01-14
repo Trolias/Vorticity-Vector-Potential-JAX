@@ -13,5 +13,11 @@ Uniform collocated grid structure
 Supported geometries: 3D lid-driven cavity and square duct flow
 
 ## Mathematical Formulation
-Solve the Vorticity Transport Equation in the non-conservative form:
+Solve the Vorticity Transport Equation (VTE) in the non-conservative form:
+
 $\frac{ \partial\vec{\omega}}{\partial t} + (\vec{\omega} \cdot \nabla)\vec{u} = \frac{1}{Re} \nabla^2\vec{\omega} + (\vec{u} \cdot \nabla)\vec{\omega}$
+
+This requires first solving the Poisson equation for the vector potential:
+$\nabla^2\vec{\psi} = - \vec{\omega}$
+
+and after that computing and updating the vorticity by solving the VTE.

@@ -9,7 +9,6 @@ from functools import partial
 config.update("jax_enable_x64", True) 
 import pickle
 
-@jit
 def CornersBC(field): # Use the field for correction near the corners
  
     updated_field = field 
@@ -81,7 +80,6 @@ def CornersBC(field): # Use the field for correction near the corners
     return updated_field
 
 
-@jit
 def calculate_divergence(u_field, v_field, w_field, dx, dy, dz):
     """
     Calculates the divergence of a 3D vector field (u, v, w) using central differences.
@@ -169,7 +167,6 @@ def save_to_vtk_fast(psi_x, psi_y, psi_z,
     print(f"Saved VTK file: {full_path}")
 
 
-@jit 
 def adaptive_time_step(u,v,w,dx,dy,dz,nu, safety: float = 0.95): 
 
     #Inner Rule 
@@ -224,3 +221,4 @@ def save_checkpoint_binary(path, psi_x, psi_y, psi_z,
     }
     with open(path, "wb") as f:
         pickle.dump(state, f)
+

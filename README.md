@@ -36,25 +36,25 @@ The code leverages **JAX** for:
 The incompressible vorticity transport equation (VTE) is solved in
 non-conservative form:
 
-$$
+$
 \frac{\partial \boldsymbol{\omega}}{\partial t}
 + (\mathbf{u} \cdot \nabla)\boldsymbol{\omega}
 = (\boldsymbol{\omega} \cdot \nabla)\mathbf{u}
 + \frac{1}{Re}\nabla^2 \boldsymbol{\omega}
-$$
+$
 
 The velocity field is recovered from the vector potential by solving the
 Poisson equation:
 
-$$
+$
 \nabla^2 \boldsymbol{\psi} = - \boldsymbol{\omega}
-$$
+$
 
 and computing:
 
-$$
+$
 \mathbf{u} = \nabla \times \boldsymbol{\psi}
-$$
+$
 
 This formulation removes the pressure variable and ensures
 $\nabla \cdot \mathbf{u} = 0$ by construction.

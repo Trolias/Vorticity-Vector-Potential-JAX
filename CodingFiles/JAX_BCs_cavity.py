@@ -4,7 +4,6 @@ from JAX_Utils_3D import CornersBC
 from functools import partial
 from JAX_Numerical_Schemes_3D import*
 
-@partial(jit, static_argnames=('field_name',))
 def apply_velocity_BCs(vel, Uwall, field_name):
     """Applies velocity boundary conditions to a field based on its component name.
 
@@ -38,10 +37,9 @@ def apply_velocity_BCs(vel, Uwall, field_name):
         vel = vel.at[1:-1, 1:-1, 0].set(0.0)
         vel = vel.at[1:-1, 1:-1, -1].set(0.0)
 
-    # vel = CornersBC(vel) # Apply corner BCs (If want Corner correction then uncomment)
+    # vel = CornersBC(vel) # Apply corner BCs (if Corner correction is desired, then uncomment)
     return vel
 
-@partial(jit, static_argnames=('field_name',))
 def apply_vorticity_bcs(omega, u, v, w, dx, dy, dz, Uwall, field_name):
     """Applies vorticity boundary conditions based on the field component and velocities.
 
@@ -95,7 +93,6 @@ def apply_vorticity_bcs(omega, u, v, w, dx, dy, dz, Uwall, field_name):
     return omega
 
 
-@partial(jit, static_argnames=('field_name',))
 def apply_vorticity_bcs_2ndOrder(omega, u, v, w, dx, dy, dz, Uwall, field_name):
     """
         Same as before but 2nd Order (Not tested yet)
@@ -132,4 +129,5 @@ def apply_vorticity_bcs_2ndOrder(omega, u, v, w, dx, dy, dz, Uwall, field_name):
         omega = omega.at[1:-1, 1:-1, -1].set(0.0) # Back Wall
 
     omega = CornersBC(omega) # Apply corner BCs 
+
     return omega

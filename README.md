@@ -1,7 +1,7 @@
 # Vorticity-Vector-Potential-JAX
 
 A GPU-accelerated Navier–Stokes solver for 3D incompressible flows using the
-vorticity–vector potential formulation, implemented in **JAX**.
+vorticity–vector potential formulation, implemented in **JAX**. 
 
 ---
 
@@ -16,6 +16,7 @@ The code leverages **JAX** for:
 - Just-In-Time (JIT) compilation
 - GPU acceleration
 
+More information regarding the vorticity - vector potential algorithm implemented in this repository can be found in: 
 ---
 
 ## Key Features

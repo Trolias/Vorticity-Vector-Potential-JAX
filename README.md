@@ -66,7 +66,7 @@ $\nabla \cdot \mathbf{u} = 0$ by construction.
 ### Requirements
 
 - Python 3.8+
-- JAX (with GPU support recommended)
+- JAX 
 - NumPy
 
 ---

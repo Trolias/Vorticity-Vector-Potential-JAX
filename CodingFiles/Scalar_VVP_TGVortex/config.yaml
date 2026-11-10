@@ -1,0 +1,18 @@
+Grid:
+  Nx: 64
+  Ny: 64
+  Nz: 64
+
+Geometry:
+  L: 6.283185307179586
+  H: 6.283185307179586
+  D: 6.283185307179586
+
+Poisson:
+  Iterations: 1200
+  tol: 1e-6
+
+conv_tol: 1e-08
+Uwall: 1.0
+Re: 100
+ghost_cells: 4

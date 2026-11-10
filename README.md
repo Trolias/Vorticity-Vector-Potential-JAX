@@ -54,9 +54,10 @@ $\nabla \cdot \mathbf{u} = 0$ by construction.
 
 ## Discretization
 
-- **Time integration:** First-order explicit Euler scheme
-- **Spatial discretization:** Second-order central finite differences
-- **Grid:** Uniform collocated mesh
+- **Time integration:** First-order explicit Euler scheme, (ADDED !) 4th order explicit Runge-Kutta
+- **Spatial discretization:** Second-order central finite differences, (ADDED !), Central Difference Schemes 4th and 6th order,
+- **Poisson Solver:** Jacobi and Conjugate Gradient Options
+- **Grid:** Uniform collocated mesh with ghost cells options
 
 ---
 

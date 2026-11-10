@@ -16,7 +16,7 @@ The code leverages **JAX** for:
 - Just-In-Time (JIT) compilation
 - GPU acceleration
 
-More information regarding the vorticity - vector potential algorithm implemented in this repository can be found in: [Thesis PDF](./Thesis.pdf)
+More information regarding the vorticity - vector potential algorithm implemented in this repository can be found in: [Thesis PDF](./docs/Thesis.pdf)
 
 ---
 

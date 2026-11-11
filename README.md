@@ -58,7 +58,7 @@ This includes the introduction of scalar potential $Φ$ by decomposing velocity 
 
 $\mathbf{u} = \nabla \times \boldsymbol{\psi} + \nabla Φ$
 
-This decomposition yields another Poisson equation for Phi. This approach was used for the numerical simulation of Taylor-Green Vortex in 3 dimensions.
+The decomposition yields another Poisson equation for Φ. This approach was used for the numerical simulation of Taylor-Green Vortex in 3 dimensions.
 
 ---
 

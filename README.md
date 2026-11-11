@@ -52,8 +52,9 @@ $\mathbf{u} = \nabla \times \boldsymbol{\psi}$
 This formulation removes the pressure variable and ensures
 $\nabla \cdot \mathbf{u} = 0$ by construction.
 
-In Scalar - VVP file the code follows the approach of () including a scalar potential $phi$ by decomposing velocity as:
-$\mathbf{u} = \nabla \times \boldsymbol{\psi} + \nabla phi$
+In Scalar - VVP file the code follows the approach of () including a scalar potential $Φ$ by decomposing velocity as:
+
+$\mathbf{u} = \nabla \times \boldsymbol{\psi} + \nabla Φ$
 
 This decomposition yields another Poisson equation for Phi. This approach was used for the numerical simulation of Taylor-Green Vortex in 3 dimensions.
 

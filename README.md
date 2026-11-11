@@ -52,7 +52,18 @@ $\mathbf{u} = \nabla \times \boldsymbol{\psi}$
 This formulation removes the pressure variable and ensures
 $\nabla \cdot \mathbf{u} = 0$ by construction.
 
-In Scalar - VVP file the code follows the approach of () including a scalar potential $Φ$ by decomposing velocity as:
+In Scalar - VVP file the code follows the approach of > Tan, J., Li, Q., Xi, H., Zheng, Q., & Pan, C. *A 3D DNS solver using the vorticity-vector potential-scalar potential formulation for incompressible turbulent flow with periodic boundary conditions*. [SSRN: 6552360](https://ssrn.com/abstract=6552360) / [DOI: 10.2139/ssrn.6552360](https://doi.org/10.2139/ssrn.6552360).
+
+### BibTeX
+```bibtex
+@article{tan2026vorticity,
+  title={A 3D DNS solver using the vorticity-vector potential-scalar potential formulation for incompressible turbulent flow with periodic boundary conditions},
+  author={Tan, Jiaxin and Li, Qing and Xi, He and Zheng, Qinmin and Pan, Chong},
+  journal={SSRN Electronic Journal},
+  year={2026},
+  doi={10.2139/ssrn.6552360},
+  url={[https://ssrn.com/abstract=6552360](https://ssrn.com/abstract=6552360)}
+} including a scalar potential $Φ$ by decomposing velocity as:
 
 $\mathbf{u} = \nabla \times \boldsymbol{\psi} + \nabla Φ$
 
